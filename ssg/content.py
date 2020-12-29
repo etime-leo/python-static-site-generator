@@ -4,7 +4,7 @@ from collections.abc import Mapping
 
 
 class Content(Mapping):
-    __delimeter = "^(?:-|\+){3}\s*$"
+    __delimeter = r"^(?:-|\+){3}\s*$"
     __regex = re.compile(__delimeter, re.MULTILINE)
 
     @classmethod
@@ -16,6 +16,10 @@ class Content(Mapping):
     def __init__(self, metadata, content):
         self.data = metadata
         self.data["content"] = content
+
+    @property
+    def body(self):
+        return self.data["content"]
 
     @property
     def type(self):
